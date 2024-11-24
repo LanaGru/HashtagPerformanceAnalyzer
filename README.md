@@ -10,16 +10,16 @@ This project uses Facebook Graph API for reading information related to hashtags
   - Fetch vector `(L, C, P)` for max `max_load_media` topmost medias for given hashtag `h` using endpoint `/<ig_hashtag>/top-media`, where `L` - number of likes, `C` - number of comments, `P` - number of media that referes hashtag `h`: `min(number_of_loaded_media, max_load_media)`. We use max_load_media = 100 to limit load on Facebook API. In future we can increase this parmeter.
   - compute average values `(L, C, P)` over all loaded medias for given `time_add` and `h`
 2. doing operations above for each day we will get for each `time_add` and `h` triple `(avg(L), avg(C), avg(P))` that can be treated as value `(L, C, P)` for every date.
-3. compute weighted function `F(h, date, L, C, P)`
+3. Compute Weighted Rang $R(L, C, P) =  w_1 L + w_2  C + w_3  P$
 4. For each hastag `h` compute its effectiveness between dates $d_1 < d_2$ by formula using derivatives:
 ```math
-  E(h) = \frac{F_{d_2}(L, C, P) - F_{d_1}(L, C, P)}{d_2 - d_1}
+  E(h) = \frac{R_{d_2}(L, C, P) - R_{d_1}(L, C, P)}{d_2 - d_1}
 ```
 
-Our assumption is that the number of likes $L$, comments $C$, and the number of pages $P$ are parameters of a weighted linear function `F`, which is _implicitly_ proportional to the engagement value.
+Our assumption is that the number of likes $L$, comments $C$, and the number of pages $P$ are parameters of a weighted linear Rank function `R`, which is _implicitly_ proportional to the engagement value.
 
 ```math
-F(L, C, P) = w_1 L + w_2  C + w_3  P
+R(L, C, P) = w_1 L + w_2  C + w_3  P
 ```
 
 The weights of these parameters, `w_i`, can be determined later during statistical analysis.
