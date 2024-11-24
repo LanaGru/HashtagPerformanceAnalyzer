@@ -3,8 +3,8 @@ This project uses Facebook Graph API for reading information related to hashtags
 1. To read codes for given hashtag we use `GET /ig_hashtag_search` -- https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-hashtag-search
 1. For further engagement analisys we use `GET /<ig_hashtag>/top-media` -- https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-hashtag/top-media
 
-Our assumption is that the number of likes `(L)`, comments `(C)`, and the number of pages `(P)` that can be fetched using 
-`GET /<ig_hashtag>/top-media` are parameters of a weighted linear function `F`, which is indirectly proportional to the engagement value.
+Our assumption is that the number of likes $L$, comments $C$, and the number of pages $P$ that can be fetched using 
+`GET /<ig_hashtag>/top-media` are parameters of a weighted linear function `F`, which is _implicitly_ proportional to the engagement value.
 
 ```math
 F(L, C, P) = w_1 L + w_2  C + w_3  P
@@ -22,7 +22,8 @@ The weights of these parameters, `w_i`, can be determined later during statistic
 ## Run script
 ```python main.py <FACEBOOK_TOKEN>```
 
-This programm will read information and store all `storage.csv` file. You can analise it using Excel or similar software.
+This programm will read information from API and stores all rows `storage.csv` file. Each run of programm will **add** records with `time_add=now()` column value to the end of file.
+Previous verion of file will be backed up with timestamp and `.bkp` extension.
 
 # Result file format
 |column name| type | description|
