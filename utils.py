@@ -53,7 +53,7 @@ class APIClient:
         return [AnalysisResponse(
             id=x['id'],
             caption=x['caption'],
-            like_count=x.get('like_count'),
+            like_count=0 if x.get('like_count') is None else x.get('like_count'),
             comments_count=x['comments_count'],
             media_url=x['media_url'],
             media_type=x['media_type'],

@@ -2,35 +2,41 @@ from datetime import datetime
 
 from storage import Storage
 from utils import APIClient
+from analysis import HashTagAnalyzer
 
-client = APIClient(
-    'EAAT9UWWFoQ0BOZB7fzqUuRUJ90QqvbOnBaW6jTTW5TOeVgU0MKfYGs22XWGFv5kCCDvvXoKUNe162jM9tmLxZAOnBImV3CuZCm0wx3UnEZCB7GxINwfNik2KsHJVZA35Jvcjv64NJFhbAyxrioR30x1Aa2ZBqCCrNoPYAgeIu6e7v5JYeLNqL8JJREJLizao0KoBNIZCPHSbOSQsFkZD')
+# API Facebook business account token
+api_token = 'EAAT9UWWFoQ0BOZB7fzqUuRUJ90QqvbOnBaW6jTTW5TOeVgU0MKfYGs22XWGFv5kCCDvvXoKUNe162jM9tmLxZAOnBImV3CuZCm0wx3UnEZCB7GxINwfNik2KsHJVZA35Jvcjv64NJFhbAyxrioR30x1Aa2ZBqCCrNoPYAgeIu6e7v5JYeLNqL8JJREJLizao0KoBNIZCPHSbOSQsFkZD'
+# Instagram business account
 instagram_business_account = 17841400907433963
+# Hashtags list
+hashcodes = """
+    ballonsmünchen
+    luftballonsmitherz
+    luftballonsmünchen
+    kinderdekoideen
+    kindergeburtstagmünchen
+    luftballonsmithelium
+    ballonstrauß
+    eventdekomünchen
+    """
 
 storage = Storage()
+client = APIClient(api_token)
+hashTagAnalyzer = HashTagAnalyzer(client=client, instagram_business_account=instagram_business_account, storage=storage)
+
 # 1. Load existing database.
 storage.load()
-load_moment = datetime.now()
 
-print(f'Loading time: {load_moment}')
+# 2. Save time of load data
+load_time = datetime.now()
+print(f'Loading time: {load_time}')
 
-#ballonsmünchen #luftballonsmitherz #luftballonsmünchen #kinderdekoideen #kindergeburtstagmünchen
-# luftballonsmithelium
-# ballonstrauß
-# eventdekomünchen
+for hash_tag in hashcodes.split():
+    print(f'Loading statistic for hashtag = [{hash_tag}]')
+    hashTagAnalyzer.compute_statistic(hash_tag, load_time)
 
-for tag_id in client.get_hash_tags_ids(instagram_business_account, 'eventdekomünchen'):
-    rec = client.get_top_media(instagram_business_account, tag_id)
-    for r in rec:
-        storage.add(hash_tag='eventdekomünchen', time_add=load_moment, r=r)
-        print(r)
-
-
-#
-# storage.add(load_moment, AnalysisResponse(id=2, caption='caption', like_count=1,
-#                                           comments_count=12,media_url="http://",
-#                                           media_type='IMGAGE', permalink="per", timestamp=datetime.now().isoformat()))
-# storage.add(load_moment, AnalysisResponse(id=12, caption='caption', like_count=1,
-#                                           comments_count=13,media_url="http://",
-#                                           media_type='IMGAGE', permalink="per", timestamp=datetime.now().isoformat()))
+# 3. Store data for further analysis
 storage.save()
+
+
+
