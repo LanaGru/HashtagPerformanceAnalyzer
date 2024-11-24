@@ -1,11 +1,16 @@
+import sys
 from datetime import datetime
 
 from storage import Storage
 from utils import APIClient
 from analysis import HashTagAnalyzer
 
+if len(sys.argv) < 2:
+    print('Specify token as programm parameter e.g.: python main.py <TOKEN>')
+    raise ValueError()
+
 # API Facebook business account token
-api_token = 'EAAT9UWWFoQ0BOZB7fzqUuRUJ90QqvbOnBaW6jTTW5TOeVgU0MKfYGs22XWGFv5kCCDvvXoKUNe162jM9tmLxZAOnBImV3CuZCm0wx3UnEZCB7GxINwfNik2KsHJVZA35Jvcjv64NJFhbAyxrioR30x1Aa2ZBqCCrNoPYAgeIu6e7v5JYeLNqL8JJREJLizao0KoBNIZCPHSbOSQsFkZD'
+api_token = sys.argv[1]
 # Instagram business account
 instagram_business_account = 17841400907433963
 # Hashtags list
