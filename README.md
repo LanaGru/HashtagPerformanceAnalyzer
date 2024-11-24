@@ -3,7 +3,7 @@ This project uses Facebook Graph API for reading information related to hashtags
 1. To read codes for given hashtag we use `GET /ig_hashtag_search` -- https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-hashtag-search
 1. For further engagement analisys we use `GET /<ig_hashtag>/top-media` -- https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-hashtag/top-media
 
-## Algorithm description.
+## Algorithm description
 
 1. Let `H` be a list of the hashtags. For each `h` from `H`:
   - Save `time_add = now()`
@@ -37,7 +37,7 @@ The weights of these parameters, `w_i`, can be determined later during statistic
 This programm will read information from API and stores all rows `storage.csv` file. Each run of programm will **add** records with `time_add=now()` column value to the end of file.
 Previous verion of file will be backed up with timestamp and `.bkp` extension.
 
-# Result file format
+# Storage file format
 |column name| type | description|
 |--------|---|------|
 |hash_tag|str|Name of hashtag|
