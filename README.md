@@ -16,8 +16,7 @@ This project uses Facebook Graph API for reading information related to hashtags
   E(h) = \frac{F_{d_2}(L, C, P) - F_{d_1}(L, C, P)}{d_2 - d_1}
 ```
 
-Our assumption is that the number of likes $L$, comments $C$, and the number of pages $P$ that can be fetched using 
-`GET /<ig_hashtag>/top-media` are parameters of a weighted linear function `F`, which is _implicitly_ proportional to the engagement value.
+Our assumption is that the number of likes $L$, comments $C$, and the number of pages $P$ are parameters of a weighted linear function `F`, which is _implicitly_ proportional to the engagement value.
 
 ```math
 F(L, C, P) = w_1 L + w_2  C + w_3  P
