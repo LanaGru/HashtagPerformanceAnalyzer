@@ -3,6 +3,19 @@ This project uses Facebook Graph API for reading information related to hashtags
 1. To read codes for given hashtag we use `GET /ig_hashtag_search` -- https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-hashtag-search
 1. For further engagement analisys we use `GET /<ig_hashtag>/top-media` -- https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-hashtag/top-media
 
+## Algorithm description.
+
+1. Let `H` be a list of the hashtags. For each `h` from `H`:
+  - Save `time_add = now()`
+  - Fetch vector `(L, C, P)` for max `max_load_media` topmost medias for given hashtag `h` using endpoint `/<ig_hashtag>/top-media`, where `L` - number of likes, `C` - number of comments, `P` - number of media that referes hashtag `h`: `min(number_of_loaded_media, max_load_media)`. We use max_load_media = 100 to limit load on Facebook API. In future we can increase this parmeter.
+  - compute average values `(L, C, P)` over all loaded medias for given `time_add` and `h`
+2. doing operations above for each day we will get for each `time_add` and `h` triple `(avg(L), avg(C), avg(P))` that can be treated as value `(L, C, P)` for every date.
+3. compute weighted function `F(h, date, L, C, P)`
+4. For each hastag `h` compute its effectiveness between dates $d_1 < d_2$ by formula using derivatives:
+```math
+  E(h) = \frac{F_{d_2}(L, C, P) - F_{d_1}(L, C, P)}{d_2 - d_1}
+```
+
 Our assumption is that the number of likes $L$, comments $C$, and the number of pages $P$ that can be fetched using 
 `GET /<ig_hashtag>/top-media` are parameters of a weighted linear function `F`, which is _implicitly_ proportional to the engagement value.
 
