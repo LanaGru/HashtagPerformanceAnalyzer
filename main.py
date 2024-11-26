@@ -6,7 +6,7 @@ from utils import APIClient
 from analysis import HashTagAnalyzer
 
 if len(sys.argv) < 2:
-    print('Specify token as programm parameter e.g.: python main.py <TOKEN>')
+    print('Specify token as program parameter e.g.: python main.py <TOKEN>')
     raise ValueError()
 
 # API Facebook business account token
@@ -26,7 +26,8 @@ hashcodes = """
     """
 
 storage = Storage()
-client = APIClient(api_token)
+
+client = APIClient(api_token, read_api_delay=60, pages_num_max=20) # 20 stands for 500 items
 hashTagAnalyzer = HashTagAnalyzer(client=client, instagram_business_account=instagram_business_account, storage=storage)
 
 # 1. Load existing database.

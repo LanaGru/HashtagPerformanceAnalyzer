@@ -28,7 +28,7 @@ class Storage:
                 response = AnalysisResponse(
                     id=int(cells[2]),
                     caption=cells[3],
-                    like_count=int(cells[4]),
+                    like_count=int(cells[4]) if cells[4] else 0,
                     comments_count=int(cells[5]),
                     media_url=cells[6],
                     media_type=cells[7],
@@ -52,5 +52,9 @@ class Storage:
                 time_add: str = s.time_record.strftime('%Y-%m-%d %H:%M:%S')
                 record = s.row
                 text = record.caption.replace("\n", "")
-                f.write(f'{s.hash_tag}\t{time_add}\t{record.id}\t{text}\t{record.like_count}\t{record.comments_count}\t{record.media_url}'
-                        f'\t{record.media_type}\t{record.permalink}\t{record.timestamp}\n')
+
+                r = '\t'.join([f'{x}' if x is not None else '' for x in [s.hash_tag, time_add, record.id, text, record.like_count,
+                                       record.comments_count, record.media_url, record.media_type,
+                                       record.permalink, record.timestamp
+                                       ]])
+                f.write(f'{r}\n')
