@@ -41,7 +41,11 @@ Previous verion of file will be backed up with timestamp and `.bkp` extension.
 
 ### 1. HashTags Trends Diagramm
 For each hashtag the chart of the values of Rank $R(L, C, P)$ function over time will be built based on the algorithm described above. 
-### 2. Effi and trends
+![screenshot](result.png)
+
+### 2. Ffficiency and trends
+
+Also detailed information for each hashtag is printed: Rank ($R$), Trend ($E$), and efficiency classification. 
 ```
 
                   hash_tag        rank     trends     efficiency
@@ -55,9 +59,20 @@ For each hashtag the chart of the values of Rank $R(L, C, P)$ function over time
 6       luftballonsmitherz   33.400000   0.000000  low-effective
 ```
 
-
+Efficiency for hash_tag is defined by the rule:
+```python
+def _hash_tag_category(like: int, comments: int, posts: int) -> str:
+    if like > 1000 and comments > 100 and posts > 10_000:
+        return 'hight-effective'
+    if (200 <= like <= 1000) and (20 <= comments < 100) and (1000 <= posts <= 10_000):
+        return 'mid-effective'
+    if like < 200 and comments < 20 and posts < 1_000:
+        return 'low-effective'
+```
 
 # Storage file format
+All Facebook Api responses are stored for future possible. The following information is stored:
+
 |column name| type | description|
 |--------|---|------|
 |hash_tag|str|Name of hashtag|
