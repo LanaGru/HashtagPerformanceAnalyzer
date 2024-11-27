@@ -38,7 +38,7 @@ This programm will read information from Facebook Graph API and store all rows t
 Previous verion of file will be backed up with timestamp and `.bkp` extension.
 
 ## Results
-
+As a result of the programm run the following artifacts are produced. 
 ### 1. HashTags Trends Diagramm
 For each hashtag the chart of the values of Rank $R(L, C, P)$ function over time will be built based on the algorithm described above. 
 ![screenshot](result.png)
