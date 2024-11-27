@@ -59,7 +59,7 @@ Also detailed information for each hashtag is printed: Rank ($R$), Trend ($E$), 
 6       luftballonsmitherz   33.400000   0.000000  low-effective
 ```
 
-Efficiency for hash_tag is defined by the rule:
+The hash_tag efficiency is defined by the following rule:
 ```python
 def _hash_tag_category(like: int, comments: int, posts: int) -> str:
     if like > 1000 and comments > 100 and posts > 10_000:
@@ -71,17 +71,15 @@ def _hash_tag_category(like: int, comments: int, posts: int) -> str:
 ```
 
 # Storage file format
-All Facebook Api responses are stored for future possible. The following information is stored:
+All Facebook Graph API responses are stored for future possible. The following information is stored:
 
 |column name| type | description|
 |--------|---|------|
 |hash_tag|str|Name of hashtag|
 |time_add|datetime|When the row is generated (moment of data fetch)|
 |record_id|int| Facebook API record indentifier |
-|record_id|int| Facebook API record indentifier |
 |caption| str | Text of top-media record |
 |like_count| int | number of likes |
-|comments_count| int | number of comments  |
 |comments_count| int | number of comments  |
 |media_url|str | URL of media |
 |media_type|str | type of the media |
