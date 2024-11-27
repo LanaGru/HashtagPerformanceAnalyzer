@@ -5,21 +5,20 @@ import shutil
 from utils import StorageRecord, AnalysisResponse
 
 class Storage:
-    def __init__(self):
+    def __init__(self, file_name: str):
+        self.file_name: str = file_name
         self.storage: list[StorageRecord] = []
 
     def add(self, hash_tag: str, time_add: datetime, r: AnalysisResponse):
         self.storage.append(StorageRecord(time_record=time_add, hash_tag=hash_tag, row=r))
 
     def load(self):
-        if not os.path.exists('storage.csv'):
+        if not os.path.exists(self.file_name):
             print('File database does not exist')
             return
-        else:
-            shutil.copy('storage.csv', f'storage-{datetime.now().isoformat().replace(" ", "_")}.bkp')
 
         row_num = 0
-        with open('storage.csv', 'r') as f:
+        with open(self.file_name, 'r') as f:
             for line in f:
                 row_num += 1
                 if row_num == 1:
@@ -45,7 +44,9 @@ class Storage:
         print(f"Loaded {len(self.storage)} items")
 
     def save(self):
-        with open('storage.csv', 'wt') as f:
+        shutil.copy(self.file_name, f'storage-{datetime.now().isoformat().replace(" ", "_")}.bkp')
+
+        with open(self.file_name, 'wt') as f:
             f.write(f'hash_tag\ttime_add\trecord_id\tcaption\tlike_count\tcomments_count\tmedia_url'
                         f'\tmedia_type\tpermalink\ttimestamp\n')
             for s in self.storage:

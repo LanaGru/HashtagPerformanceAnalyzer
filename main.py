@@ -24,8 +24,9 @@ hashtages = """
     ballonstrauß
     eventdekomünchen
     """
+target_storage_file = 'storage.csv'
 
-storage = Storage()
+storage = Storage(file_name=target_storage_file)
 
 client = APIClient(api_token, read_api_delay=60, pages_num_max=20)  # 20 stands for 500 items
 hashTagAnalyzer = HashTagAnalyzer(client=client, instagram_business_account=instagram_business_account, storage=storage)
@@ -43,7 +44,7 @@ for hashtag in hashtages.split():
 
     storage.save()
 
-result = hashTagAnalyzer.compute_trends_and_efficiency('storage.csv')
+result = hashTagAnalyzer.compute_trends_and_efficiency(res_file_path=target_storage_file)
 
 print(result)
 
