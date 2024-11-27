@@ -34,8 +34,28 @@ The weights of these parameters, `w_i`, can be determined later during statistic
 ## Run script
 ```python main.py <FACEBOOK_TOKEN>```
 
-This programm will read information from API and stores all rows `storage.csv` file. Each run of programm will **add** records with `time_add=now()` column value to the end of file.
+This programm will read information from Facebook Graph API and store all rows to `storage.csv` file. Each run of programm will **add** records with `time_add=now()` column value to the end of file.
 Previous verion of file will be backed up with timestamp and `.bkp` extension.
+
+## Results
+
+### 1. HashTags Trends Diagramm
+For each hashtag the chart of the values of Rank $R(L, C, P)$ function over time will be built based on the algorithm described above. 
+### 2. Effi and trends
+```
+
+                  hash_tag        rank     trends     efficiency
+4  kindergeburtstagmünchen  637.659200  -2.911797  low-effective
+2         eventdekomünchen  557.407229  -3.692254  low-effective
+1             ballonstrauß  283.894581 -14.191143  low-effective
+3          kinderdekoideen  275.447059   5.501247  low-effective
+5     luftballonsmithelium  155.151515  -0.420381  low-effective
+7       luftballonsmünchen  126.588235  -2.185587  low-effective
+0           ballonsmünchen   74.816667   0.744714  low-effective
+6       luftballonsmitherz   33.400000   0.000000  low-effective
+```
+
+
 
 # Storage file format
 |column name| type | description|
@@ -52,3 +72,5 @@ Previous verion of file will be backed up with timestamp and `.bkp` extension.
 |media_type|str | type of the media |
 |permalink| str | permanent link to page | 
 |timestamp | datetime | date and time when post was created |
+
+
