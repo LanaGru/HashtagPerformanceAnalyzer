@@ -43,11 +43,11 @@ class HashTagAnalyzer:
 
     @staticmethod
     def _hash_tag_category(like: int, comments: int, posts: int) -> str:
-        if like > 1000 and comments > 100 and posts > 10_000:
+        if like > 1000 or comments > 100 or posts > 10_000:
             return 'hight-effective'
-        if (200 <= like <= 1000) and (20 <= comments < 100) and (1000 <= posts <= 10_000):
+        if (200 <= like <= 1000) or (20 <= comments <= 100) or (1000 <= posts <= 10_000):
             return 'mid-effective'
-        if like < 200 and comments < 20 and posts < 1_000:
+        if like < 200 or comments < 20 or posts < 1_000:
             return 'low-effective'
 
     @staticmethod
