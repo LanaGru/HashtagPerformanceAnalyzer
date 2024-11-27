@@ -43,7 +43,7 @@ Previous verion of file will be backed up with timestamp and `.bkp` extension.
 For each hashtag the chart of the values of Rank $R(L, C, P)$ function over time will be built based on the algorithm described above. 
 ![screenshot](result.png)
 
-### 2. Ffficiency and trends
+### 2. Efficiency and trends
 
 Also detailed information for each hashtag is printed: Rank ($R$), Trend ($E$), and efficiency classification. 
 ```
