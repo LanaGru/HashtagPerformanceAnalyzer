@@ -14,7 +14,7 @@ api_token = sys.argv[1]
 # Instagram business account
 instagram_business_account = 17841400907433963
 # Hashtags list
-hashcodes = """
+hashtages = """
     ballonsmünchen
     luftballonsmitherz
     luftballonsmünchen
@@ -31,17 +31,17 @@ client = APIClient(api_token, read_api_delay=60, pages_num_max=20)  # 20 stands 
 hashTagAnalyzer = HashTagAnalyzer(client=client, instagram_business_account=instagram_business_account, storage=storage)
 
 # 1. Load existing database.
-# storage.load()
+storage.load()
 
 # 2. Save time of load data
 load_time = datetime.now()
 print(f'Loading time: {load_time}')
 
-# for hash_tag in hashcodes.split():
-#     print(f'Loading statistic for hashtag = [{hash_tag}]')
-#     hashTagAnalyzer.compute_statistic(hash_tag, load_time)
-#
-#     storage.save()
+for hashtag in hashtages.split():
+    print(f'Loading statistic for hashtag = [{hashtag}]')
+    hashTagAnalyzer.compute_statistic(hashtag, load_time)
+
+    storage.save()
 
 result = hashTagAnalyzer.compute_trends_and_efficiency('storage.csv')
 
